@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Username Extractor</title>
+    <script>
+        function extractUsernames() {
+            const text = document.getElementById('inputText').value;
+            const words = text.split(/\s+/);
+            const usernames = words.filter(word => word.endsWith("'s") && word !== "'s")
+                                   .map(username => `@${username.slice(0, -2)}`);
+
+            if (usernames.length > 0) {
+                document.getElementById('output').textContent = usernames.join('\n');
+                document.getElementById('count').textContent = `Number of usernames found: ${usernames.length}`;
+            } else {
+                document.getElementById('output').textContent = "No usernames found!";
+                document.getElementById('count').textContent = "";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h2>Username Extractor</h2>
+    <textarea id="inputText" rows="10" cols="50" placeholder="Paste the text here..."></textarea>
+    <br>
+    <button onclick="extractUsernames()">Extract Usernames</button>
+    <br>
+    <pre id="output"></pre>
+    <div id="count"></div>
+</body>
+</html>
